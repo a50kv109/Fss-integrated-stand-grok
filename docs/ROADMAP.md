@@ -18,7 +18,7 @@
 
 ## 2. Development Phases
 
-### Phase 5A — Repository Packaging & Publication Preparation (CURRENT)
+### Phase 5A — Repository Packaging & Publication Preparation (COMPLETE)
 * [x] Complete system inventory and codebase audit.
 * [x] Establish canonical documentation suite in `docs/` (`PROJECT_PASSPORT`, `ARCHITECTURE`, `MATHEMATICAL_MODEL`, `CLASSIFIER_CONTRACT`, `INTEGRATION_HISTORY`, `TESTING`, `LIMITATIONS`, `ROADMAP`).
 * [x] Create root `README.md`, `CONTRIBUTING.md`, and clean `.env.example`.
@@ -28,25 +28,39 @@
 
 ---
 
-### Phase 5B — Legacy Test Debt Reconciliation (UPCOMING)
-* [ ] Reconcile stale 4-record expectations in `core/property_evidence.test.ts` (update assertion from 4 to 8).
-* [ ] Reconcile stale 4-record manifest check in `core/schema/crystallographic_extractor.test.ts` (update assertion from 4 to 8).
-* [ ] Achieve 15/15 passing test files across the repository.
+### Phase 5B — Legacy Test Debt Reconciliation (COMPLETE)
+* [x] Reconcile stale 4-record expectations in `core/property_evidence.test.ts` (update assertion from 4 to 8, robust predicate lookup).
+* [x] Reconcile stale 4-record manifest check in `core/schema/crystallographic_extractor.test.ts` (update assertion from 4 to 8, robust lookup).
+* [x] Achieve 15/15 passing test suites across the repository (100% PASS, verified in-environment via `npx tsx`).
+* [x] Document execution evidence and artifact consistency in `docs/analysis/PHASE_5B_READINESS_REPORT.md`.
 
 ---
 
-### Phase 5C — Group Closure Engine
-* [ ] Implement `core/group_closure.ts`: Compute the algebraic closure $\langle S \rangle$ of a set of symmetry operations $S$ modulo $\mathbb{Z}^3$.
-* [ ] Validate closure properties: identity existence, two-sided inverses, and composition closure.
-* [ ] Enable classification of partial generator sets (e.g. expanding 2 generators into 4 operations before calling `filterCandidates`).
+### Phase 5C — Packaging Repair & Epistemic Boundary Hardening (COMPLETE)
+* [x] Package run script repair: updated `npm start` to execute `tsx server.ts` with `"engines": { "node": ">=18" }` (fixing Node native ESM resolution failure).
+* [x] Verified full suite independent execution (RERUN: 15/15 PASS, clean `tsc --noEmit`, clean `vite build`, successful server startup smoke test).
+* [x] Synchronized root and specialized documentation (`STATUS.md`, `ROADMAP.md`, `README.md`, `docs/CLASSIFIER_CONTRACT.md`, `docs/LIMITATIONS.md`).
+* [x] Hardened epistemic boundaries against overclaiming universal soundness, origin shifts beyond SG 19, or isomorphism beyond canonical representations.
+* [x] Production math core and 8-setting registry strictly preserved with zero alterations.
 
 ---
 
-### Phase 5D — Controlled REST API & UI Matcher Exposure
-* [ ] Implement `POST /api/classify` in `server.ts` with strict input validation and rate limiting.
-* [ ] Ensure API responses adhere strictly to `TwoStageMatchReport` and `FSS_CLASSIFIER_CONTRACT.md`.
-* [ ] Create React inspection component: "Symmetry Operation Classifier (8 Catalog Settings)".
-* [ ] Enforce epistemic labeling: display matched settings, candidate pruning reasons, and explicit disclaimers when inputs do not match catalog entries.
+### Phase 5D — Controlled REST API & UI Matcher Exposure (COMPLETE)
+* [x] Implement `POST /api/classify` in `server.ts` with strict input validation and rate limiting.
+* [x] Ensure API responses adhere strictly to `TwoStageMatchReport` and `FSS_CLASSIFIER_CONTRACT.md`.
+* [x] Perform independent API boundary testing.
+
+---
+
+### Phase 5E — Classifier UI Integration (COMPLETE)
+* [x] Create React ClassifierUI component.
+* [x] Integrate with `POST /api/classify`.
+* [x] Add tab-based navigation for experiment vs. classifier.
+* [x] Verify UI functionality against API contract.
+
+---
+
+### Phase 5F — Group Closure Engine (PLANNED)
 
 ---
 

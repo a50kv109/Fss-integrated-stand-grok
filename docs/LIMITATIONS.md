@@ -39,12 +39,13 @@ To preserve scientific rigor, all developers, documentation authors, and API con
 
 ---
 
-## 3. Legacy Test Debt
+## 3. Reconciled Test Debt (Resolved in Phase 5B)
 
-* `core/property_evidence.test.ts` (asserts `reports.length === 4`, actual: 8)
-* `core/schema/crystallographic_extractor.test.ts` (asserts `manifest.recordCount === 4`, actual: 8)
+The two legacy test debt items identified during Phase 5A have been completely reconciled:
+* `core/property_evidence.test.ts`: Updated benchmark report expectation from 4 to 8; replaced index-dependent `records[2]` with robust predicate lookup `records.find(r => r.spaceGroupNumber === 14)!`.
+* `core/schema/crystallographic_extractor.test.ts`: Updated manifest record count and artifact length expectations from 4 to 8; replaced index-dependent `records[2]` with robust predicate lookup.
 
-Both test files fail due to stale assertions from early development before the benchmark was expanded to 8 settings. They are preserved without modifications in Phase 5A to maintain zero code edits, and will be reconciled in Phase 5B.
+**Current Test Status:** 15 / 15 test suites PASS (100%), verified via clean independent in-environment runs. Zero test debt remains.
 
 ---
 

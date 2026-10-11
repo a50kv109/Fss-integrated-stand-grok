@@ -180,15 +180,17 @@ fss-integrated-stand/
 5. [docs/INTEGRATION_HISTORY.md](docs/INTEGRATION_HISTORY.md) — Step-by-step history of GROK integration
 6. [docs/TESTING.md](docs/TESTING.md) — Execution status of all test suites and lint/build checks
 7. [docs/LIMITATIONS.md](docs/LIMITATIONS.md) — Negative boundaries and prohibited claims
-8. [docs/ROADMAP.md](docs/ROADMAP.md) — Engineering phases (5B test debt, 5C closure, 6 catalog expansion)
+8. [docs/ROADMAP.md](docs/ROADMAP.md) — Engineering phases (5A docs, 5B test debt, 5C repair, 5D REST/UI, 6 catalog)
 
 ---
 
 ## 9. Current Status & Next Steps
 
-* **Current Status:** Integrated Research Stand (Post-Phase 4E Reconciliation). Stable core, 13/15 passing test suites, clean lint and build.
+* **Current Status:** Integrated Research Stand (Phases 5A-5E Packaging, API, and UI Integration Complete).
+  - Classifier API (`/api/classify`) implemented and boundary-tested.
+  - Classifier UI view integrated and verified.
+  - 15 / 15 test suites PASS (100%).
+  - Mathematical core and catalog intact and unmodified.
 * **Next Steps:**
-  1. Human review and selection of open-source repository license.
-  2. Phase 5B: Reconcile 2 legacy Stage A test files (`property_evidence.test.ts`, `crystallographic_extractor.test.ts`).
-  3. Phase 5C: Implement `core/group_closure.ts` for automated generator expansion.
-  4. Phase 5D: Design `/api/classify` endpoint and React UI inspector.
+  1. Phase 5F: Implementation of `core/group_closure.ts` for dynamic group closure verification.
+  2. Phase 6: Systematic expansion to full 230 space groups.

@@ -3,10 +3,34 @@ import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import path from 'path';
 import { runSymmetryExperiment } from './core/engine';
+import { classifyOperationSet } from './core/operation_set_match';
 import { CANONICAL_STRUCTURES, CANONICAL_OPERATIONS } from './core/canonical';
 
 const app = express();
 const PORT = 3000;
+
+// API: Classify symmetry operations
+app.post('/api/classify', (req, res) => {
+  const contentLength = parseInt(req.headers['content-length'] || '0', 10);
+  if (contentLength > 100 * 1024) {
+    return res.status(413).json({ error: 'PAYLOAD_TOO_LARGE' });
+  }
+
+  const { operations } = req.body;
+  if (!operations || !Array.isArray(operations)) {
+    return res.status(400).json({ error: 'INVALID_INPUT' });
+  }
+  if (operations.length > 50) {
+    return res.status(400).json({ error: 'OPERATION_LIMIT_EXCEEDED' });
+  }
+
+  try {
+    const report = classifyOperationSet(operations);
+    return res.json(report);
+  } catch (error) {
+    return res.status(500).json({ error: 'INTERNAL_ERROR' });
+  }
+});
 
 app.use(express.json());
 

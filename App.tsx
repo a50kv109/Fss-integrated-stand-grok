@@ -8,7 +8,8 @@ import {
 } from './core/canonical';
 import { Evidence, VerificationPredicate } from './core/types';
 import { TetrahedronViewport } from './components/TetrahedronViewport';
-import { CheckCircle2, XCircle, RotateCcw, Copy, Check, Terminal, Play } from 'lucide-react';
+import ClassifierUI from './components/ClassifierUI';
+import { CheckCircle2, XCircle, RotateCcw, Copy, Check, Terminal, Play, Microscope } from 'lucide-react';
 
 const App: React.FC = () => {
   const [evidence, setEvidence] = useState<Evidence | null>(null);
@@ -16,6 +17,7 @@ const App: React.FC = () => {
   const [epsilon, setEpsilon] = useState<number>(1e-5);
   const [copied, setCopied] = useState(false);
   const [activeOpId, setActiveOpId] = useState<string | null>(null);
+  const [view, setView] = useState<'experiment' | 'classifier'>('experiment');
 
   // HUMAN PATH: Calls the exact same deterministic core function
   const handleRunPositive = (pred?: VerificationPredicate) => {
@@ -92,9 +94,14 @@ const App: React.FC = () => {
 
       {/* Main Two-Column Layout */}
       <main className="flex-1 p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-[1700px] w-full mx-auto">
-        
-        {/* Left Control & Evidence Column (5 cols) */}
-        <section className="lg:col-span-5 flex flex-col gap-4 overflow-y-auto pr-1">
+        {view === 'classifier' ? (
+          <div className="lg:col-span-12">
+            <ClassifierUI />
+          </div>
+        ) : (
+          <>
+            {/* Left Control & Evidence Column (5 cols) */}
+            <section className="lg:col-span-5 flex flex-col gap-4 overflow-y-auto pr-1">
           
           {/* Structure Specification Card */}
           <div className="bg-[#080d1a] border border-slate-800/80 rounded-xl p-4 space-y-3">
@@ -431,7 +438,9 @@ const App: React.FC = () => {
             </div>
           </div>
         </section>
-      </main>
+          </>
+        )}
+        </main>
     </div>
   );
 };
