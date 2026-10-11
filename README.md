@@ -174,13 +174,14 @@ fss-integrated-stand/
 ## 8. Documentation Index
 
 1. [docs/PROJECT_PASSPORT.md](docs/PROJECT_PASSPORT.md) — System passport and scope boundaries
-2. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — Architectural layers, data pipelines, and gating
-3. [docs/MATHEMATICAL_MODEL.md](docs/MATHEMATICAL_MODEL.md) — Group theory, rational arithmetic, and invariants
-4. [docs/CLASSIFIER_CONTRACT.md](docs/CLASSIFIER_CONTRACT.md) — Normative classifier verdicts and decision rules
-5. [docs/INTEGRATION_HISTORY.md](docs/INTEGRATION_HISTORY.md) — Step-by-step history of GROK integration
-6. [docs/TESTING.md](docs/TESTING.md) — Execution status of all test suites and lint/build checks
-7. [docs/LIMITATIONS.md](docs/LIMITATIONS.md) — Negative boundaries and prohibited claims
-8. [docs/ROADMAP.md](docs/ROADMAP.md) — Engineering phases (5A docs, 5B test debt, 5C repair, 5D REST/UI, 6 catalog)
+2. [docs/SG-IMPORT-PROTOCOL.md](docs/SG-IMPORT-PROTOCOL.md) — Registration & Verification Protocol
+3. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — Architectural layers, data pipelines, and gating
+4. [docs/MATHEMATICAL_MODEL.md](docs/MATHEMATICAL_MODEL.md) — Group theory, rational arithmetic, and invariants
+5. [docs/CLASSIFIER_CONTRACT.md](docs/CLASSIFIER_CONTRACT.md) — Normative classifier verdicts and decision rules
+6. [docs/INTEGRATION_HISTORY.md](docs/INTEGRATION_HISTORY.md) — Step-by-step history of GROK integration
+7. [docs/TESTING.md](docs/TESTING.md) — Execution status of all test suites and lint/build checks
+8. [docs/LIMITATIONS.md](docs/LIMITATIONS.md) — Negative boundaries and prohibited claims
+9. [docs/ROADMAP.md](docs/ROADMAP.md) — Engineering phases (5A docs, 5B test debt, 5C repair, 5D REST/UI, 6 catalog)
 
 ---
 

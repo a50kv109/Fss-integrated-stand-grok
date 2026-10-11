@@ -18,7 +18,8 @@ const expectedCounts: Record<string, number> = {
   "P212121": 4,
   "P21/c": 4,
   "C2": 4,
-  "Cc": 4
+  "Cc": 4,
+  "P41": 4
 };
 
 // Helper for rational arithmetic
@@ -146,6 +147,12 @@ assert(recCc!.groupNumber === 9, 'Cc group number must be 9');
 assert(recC2!.hmSymbol !== recCc!.hmSymbol, 'C2 and Cc must have distinct HM symbols');
 assert(recC2!.hallSymbol !== recCc!.hallSymbol, 'C2 and Cc must have distinct Hall symbols');
 assert(recC2!.operations.length === recCc!.operations.length, 'C2 and Cc both have 4 operations but differ in glide/centering semantics');
+
+// 3. Specific tests for P41
+const recP41 = SymmetryCatalog.findBySettingId("P41");
+assert(!!recP41, 'Group P41 must be registered');
+assert(recP41!.groupNumber === 76, 'P41 group number must be 76');
+assert(recP41!.hmSymbol === "P 41", 'P41 HM symbol must be P 41');
 
 // Provenance check
 const p1 = SymmetryCatalog.findBySettingId("P1");
