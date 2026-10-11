@@ -16,19 +16,18 @@
 | 3 | (-x, -y, z+1/2) | [[-1,0,0], [0,-1,0], [0,0,1]] | {numerator: 0, denominator: 1}, {numerator: 0, denominator: 1}, {numerator: 1, denominator: 2} |
 | 4 | (y, -x, z+3/4) | [[0,1,0], [-1,0,0], [0,0,1]] | {numerator: 0, denominator: 1}, {numerator: 0, denominator: 1}, {numerator: 3, denominator: 4} |
 
-## 3. Mathematical Verification
-- **Screw Axis**: Operations define a $4_1$ screw axis along the [0,0,1] direction.
-- **Generator Check**: The fourth power of operation #2 (the generator) is equal to a full integer translation $(0, 0, 1)$ along the c-axis, confirming the $4_1$ symmetry.
-- **Verification Methodology**:
-    - **Analytic**: Closure under group composition and symmetry properties of the screw axis generator have been verified analytically.
-    - **Programmatic (Self-Consistency)**: The set of operations was verified against the classifier (`core/operation_set_match.ts`) using self-consistency check (`scripts/audit_sg76.ts`), resulting in `EXACT_MATCH`.
-    - **Note**: Independent verification of operations against external crystallographic data is still required for absolute validation.
-- **Registration Report**: Detailed mathematical analysis and validation can be found in `/docs/analysis/SG_076_P41_REGISTRATION_REPORT.md`.
+## 3. Mathematical Verification & Evidence Status
+- **Screw Axis Relation**: Intended relation is $g^4 = T_{(0,0,1)}$ along $[0,0,1]$.
+- **Internal Consistency**: Verified via script and unit test assertions (identity, closure, inverse, self-matching). Status: `INTERNAL_CONSISTENCY_CHECKED`.
+- **Independent Mathematical Verification**: An independent reference check or external derivation has not yet been completed in this environment. Status: `PENDING`.
+- **Registration Report**: Detailed evidence ledger and validation notes can be found in `/docs/analysis/SG_076_P41_REGISTRATION_REPORT.md`.
 
-## 4. Status
+## 4. Status Dimensions
 - **Protocol Stage**: 8. ACCEPT & DOCUMENT
-- **Overall Status**: COMPLIANT
-- **Registration Status**: REGISTERED
-- **Mathematical Status**: MATH_VERIFIED (Self-consistency only)
-- **Integration Status**: INTEGRATION_VERIFIED
+- **Documentation Compliance Status**: `COMPLIANT` (Satisfies procedural and evidence-reporting requirements; does NOT imply mathematical verification has succeeded).
+- **Data Validation Status**: `DATA_VALIDATED`
+- **Internal Consistency Status**: `INTERNAL_CONSISTENCY_CHECKED`
+- **Independent Mathematical Verification Status**: `PENDING`
+- **Registration Status**: `REGISTERED` (Present in `core/registry.ts`)
+- **Integration Status**: `INTEGRATION_VERIFIED` (Unit tested in `core/registry.test.ts` and verified via internal consistency script)
 - **Reference**: Follows [SG-IMPORT-PROTOCOL.md](/docs/SG-IMPORT-PROTOCOL.md)

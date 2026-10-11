@@ -27,7 +27,7 @@ This repository represents an **integrated research stand**, unifying capabiliti
 |  [Studio FSS Baseline Architecture]         [GROK v0.1.1 Adapted Capabilities]          |
 |  - Vector-affine geometric engine           - Two-stage classification algorithm        |
 |  - 3D Three.js interactive viewport         - Coordinate-independent invariant profiler|
-|  - 8-setting reference catalog              - Strict canonical key matcher              |
+|  - 9-setting reference catalog              - Strict canonical key matcher              |
 |  - Exact BigInt rational arithmetic         - Multiset duplicate detection              |
 |  - Express REST server & Vite build         - Soundness test suite (T1-T10, S1-S16)     |
 +-----------------------------------------------------------------------------------------+
@@ -39,7 +39,7 @@ This repository represents an **integrated research stand**, unifying capabiliti
 
 ### What was adapted and preserved from Studio FSS:
 * All rational arithmetic was adapted to Studio's BigInt-backed `ExactRational`.
-* The matcher was expanded from GROK's 4-group prototype to query Studio's **8-setting reference catalog** (`core/registry.ts`).
+* The matcher was expanded from GROK's 4-group prototype to query Studio's **9-setting reference catalog** (`core/registry.ts`).
 * The vector-affine geometric engine (`core/engine.ts`), affine dimensionality engine (`core/dimension.ts`), and 3D visualization stand remained 100% intact with zero breaking modifications.
 
 ---
@@ -64,7 +64,7 @@ This repository represents an **integrated research stand**, unifying capabiliti
 ## 4. Current Mathematical Boundaries & Limitations
 
 To maintain scientific rigor, the system enforces strict epistemic boundaries:
-1. **Catalog Bound (8 of 230):** The current working catalog contains 8 space group settings (Nos. 1, 2, 3, 4, 5, 9, 14, 19). Queries for the remaining 222 space groups correctly report `NO_CANDIDATES`.
+1. **Catalog Bound (9 of 230):** The current working catalog contains 9 space group settings (Nos. 1, 2, 3, 4, 5, 9, 14, 19, 76). Queries for the remaining 221 space groups correctly report `NO_CANDIDATES`.
 2. **Invariant Profile $\neq$ Space Group Identification:** Invariant profile matching is a necessary filter, **never** a sufficient proof of space group identity (e.g. $P2$ and $P21$ have identical profiles).
 3. **Representation Matching $\neq$ General Isomorphism:** `EXACT_MATCH` proves equality in the canonical coordinate basis of the catalog setting modulo $\mathbb{Z}^3$. Arbitrary basis changes ($P \in GL_3(\mathbb{Z})$) and continuous origin shifts are not implemented.
 4. **Group Closure Notice:** The matcher evaluates complete operation lists against catalog entries. It does not automatically compute group closure $\langle S \rangle$ for sparse generator sets.
@@ -154,7 +154,7 @@ fss-integrated-stand/
 │   ├── dimension.ts            # 3D affine dimensionality analysis
 │   ├── operation_set_profile.ts# Algebraic invariant profiler (EXP-09)
 │   ├── operation_set_match.ts  # Two-stage candidate matcher (EXP-09)
-│   ├── registry.ts             # 8-setting space group catalog
+│   ├── registry.ts             # 9-setting space group catalog
 │   └── schema/                 # Exact rational arithmetic & exchange
 ├── data/                       # Crystallographic benchmarks (Gemmi)
 └── docs/                       # Project documentation
@@ -164,7 +164,7 @@ fss-integrated-stand/
     ├── CLASSIFIER_CONTRACT.md  # Normative verdicts & rules
     ├── INTEGRATION_HISTORY.md  # Detailed history of GROK assimilation
     ├── TESTING.md              # Test execution guide & results
-    ├── LIMITATIONS.md          # Prohibited claims & technical gaps
+    ├── LIMITATIONS.md          # Negative boundaries and prohibited claims
     ├── ROADMAP.md              # Development phases
     └── analysis/               # Phase 4A-4E analytical reports
 ```
