@@ -46,7 +46,7 @@
 ---
 
 ### Phase 5D — Controlled REST API & UI Matcher Exposure (COMPLETE)
-* [x] Implement `POST /api/classify` in `server.ts` with strict input validation and rate limiting.
+* [x] Implement `POST /api/classify` in `server.ts` with strict input validation.
 * [x] Ensure API responses adhere strictly to `TwoStageMatchReport` and `FSS_CLASSIFIER_CONTRACT.md`.
 * [x] Perform independent API boundary testing.
 

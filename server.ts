@@ -169,4 +169,7 @@ async function startServer() {
   });
 }
 
-startServer();
+// ...
+if (import.meta.url === `file://${process.cwd()}/server.ts`) {
+  startServer();
+}
