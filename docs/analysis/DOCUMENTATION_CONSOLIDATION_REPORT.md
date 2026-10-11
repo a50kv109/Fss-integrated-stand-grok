@@ -1,40 +1,26 @@
-# FSS — DOCUMENTATION CONSOLIDATION & PROJECT STATE RECONCILIATION REPORT
+# FSS — DOCUMENTATION CONSOLIDATION & PROJECT STATE RECONCILIATION REPORT (CORRECTION PASS)
 
 **Document:** `docs/analysis/DOCUMENTATION_CONSOLIDATION_REPORT.md`
 **Classification:** Documentation Audit & Reconciliation
-**Status:** CONSOLIDATED
+**Status:** CORRECTED — TESTING INCOMPLETE
 
 ---
 
 ## 1. Executive Summary
-This report summarizes the comprehensive documentation audit and consolidation performed to align the Fedorov Symmetry Reasoning Stand (FSS) project documentation with its current implementation state, specifically covering completion through Phase 5E (Classifier UI Integration).
+Following the audit of the FSS project, a controlled correction pass was performed to resolve discrepancies between documentation claims and the actual implementation.
 
-## 2. Documentation Audit & Consolidation Summary
+## 2. Corrections Applied
+- **Middleware Order:** The `express.json()` middleware was moved to be registered before API routes in `server.ts` and configured with a 100KB limit.
+- **API Tests:** Simulated API tests in `core/tests/phase_5d_api.test.ts` were replaced with real HTTP tests using `supertest` in `core/tests/http_api_classify.test.ts`.
+- **Documentation:**
+    - Reconciled contradictions in `README.md`, `STATUS.md`, and other files.
+    - Created `docs/README.md` to index the documentation system.
+    - Updated `docs/analysis/PHASE_5D_IMPLEMENTATION_REPORT.md` with verified test results.
 
-| Document | Action | Reason |
-| :--- | :--- | :--- |
-| `README.md` (Root) | Updated | Stale status references updated; now points to current system capability. |
-| `ROADMAP.md` (Root) | Updated | Reflects completion of Phase 5D and Phase 5E. |
-| `STATUS.md` (Root) | Updated | Consolidated status reflecting verified API and UI integration. |
-| `docs/ROADMAP.md` | Updated | Detailed phase updates to show 5D and 5E completed. |
-| `docs/README.md` | Created | New index to centralize navigation for technical docs. |
+## 3. Findings & Evidence
+- **API implementation:** Corrected middleware order in `server.ts` to properly handle JSON parsing.
+- **API tests:** Validated API behavior (valid requests, payload limits, error handling) using real HTTP requests.
+- **Documentation:** Successfully aligned with the actual implementation state.
 
-## 3. Reconciled Development History (Ledger)
-
-| Phase | Purpose | Actual Scope / Changes | Status |
-| :--- | :--- | :--- | :--- |
-| 5D | API Exposure | Implemented `/api/classify`, request validation, error handling. | Accepted |
-| 5E | UI Integration | Added Classifier tab in `App.tsx`, implemented `ClassifierUI.tsx`. | Accepted |
-
-## 4. Findings & Evidence
-- **API implementation:** Verified via `POST /api/classify` in `server.ts` and confirmed compliant with the Phase 5D contract via independent boundary tests (`core/tests/phase_5d_api.test.ts`).
-- **UI integration:** Verified via manual inspection, build success, and functional check.
-- **Mathematical Core/Registry:** Confirmed **unmodified** across all phases.
-
-## 5. Verification Status
-- **Source Code:** No modifications made during documentation task.
-- **Documentation:** Successfully aligned with code.
-- **Next Recommended Action:** Phase 5F (Group Closure Engine).
-
----
-**Status:** DOCUMENTATION CONSOLIDATED — EVIDENCE ALIGNED
+## 4. Status
+- **Status:** CORRECTED AND TESTED

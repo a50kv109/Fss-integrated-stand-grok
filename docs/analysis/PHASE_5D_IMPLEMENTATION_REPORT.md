@@ -30,12 +30,13 @@ Phase 5D implementation has been completed. The Classifier API is operational, e
 ## 4. Tests Executed
 The existing test suite in `core/filter_soundness.test.ts` was verified to pass, ensuring no regression in core matching logic or filter soundness.
 
-Focused tests for Phase 5D (API boundaries) were executed independently via `npx tsx core/tests/phase_5d_api.test.ts`:
+Focused tests for Phase 5D (API boundaries) were executed independently via `npx tsx core/tests/http_api_classify.test.ts`:
 1. Valid request (< 50 operations): PASS
 2. Exactly 50 operations: PASS
 3. 51 operations rejected: PASS (400)
 4. Request body > 100 KB: PASS (413)
 5. Invalid input handling: PASS (INVALID_INPUT)
+6. Malformed JSON: PASS (Express json error handler)
 
 All tests passed successfully.
 

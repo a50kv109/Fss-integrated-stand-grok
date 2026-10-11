@@ -7,10 +7,14 @@ import { classifyOperationSet } from './core/operation_set_match';
 import { CANONICAL_STRUCTURES, CANONICAL_OPERATIONS } from './core/canonical';
 
 const app = express();
+export { app };
 const PORT = 3000;
+
+app.use(express.json({ limit: '100kb' }));
 
 // API: Classify symmetry operations
 app.post('/api/classify', (req, res) => {
+  // Manual check of content length for 413
   const contentLength = parseInt(req.headers['content-length'] || '0', 10);
   if (contentLength > 100 * 1024) {
     return res.status(413).json({ error: 'PAYLOAD_TOO_LARGE' });
@@ -31,8 +35,6 @@ app.post('/api/classify', (req, res) => {
     return res.status(500).json({ error: 'INTERNAL_ERROR' });
   }
 });
-
-app.use(express.json());
 
 // AGENT TOOL ENDPOINT: Executes deterministic symmetry experiment
 app.post('/api/experiment', (req, res) => {
