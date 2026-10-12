@@ -52,7 +52,7 @@
 
 ---
 
-### Phase 5E — Classifier UI Integration (COMPLETE)
+### Phase 5E — Classifier UI Integration (PARTIALLY COMPLETE)
 * [x] Create React ClassifierUI component.
 * [x] Integrate with `POST /api/classify`.
 * [ ] Add tab-based navigation for experiment vs. classifier (unexposed; view state initialized in `App.tsx` without navigation switcher).

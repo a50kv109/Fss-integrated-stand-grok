@@ -1,6 +1,6 @@
 # FSS - Status
 
-**Status:** Integrated Research Stand (`PHASE 5E COMPLETED & VERIFIED`)
+**Status:** Integrated Research Stand (`PHASE 5E PARTIALLY COMPLETED: API & COMPONENT IMPLEMENTED, UI UNEXPOSED`)
 
 ## Current Execution & Verification Status
 - **Project Test Harness Status:** 15 / 15 baseline project test suites PASS per execution report.
@@ -19,7 +19,7 @@
 - **Phase 5B**: Legacy Test Debt Reconciliation (`COMPLETED`)
 - **Phase 5C**: Packaging Repair & Epistemic Hardening (`COMPLETED`)
 - **Phase 5D**: Controlled REST API & UI Matcher Exposure (`COMPLETED`)
-- **Phase 5E**: Classifier UI Integration (`COMPLETED`)
+- **Phase 5E**: Classifier UI Integration (`PARTIALLY COMPLETED`: API & `ClassifierUI` implemented, user navigation unexposed)
 - **Phase 5F**: Group Closure Engine (`ISOLATED_MODULE_TESTED`; unwired research module)
 - **Phase 6**: Catalog Expansion (`PLANNED`)
 
