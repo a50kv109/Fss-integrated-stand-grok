@@ -29,12 +29,12 @@
 | `core/group_closure` | `ISOLATED_MODULE_TESTED` | BFS closure from generators modulo Z^3 on BigInt; T1–T15 pass per execution report. Unwired. |
 | `core/` (Geometry) | `IMPLEMENTED` | Tested (Registry-Free Support) |
 | `core/operation_set_profile` | `IMPLEMENTED` | Algebraic invariant profiler (EXP-09, T1–T10) |
-| `core/operation_set_match` | `IMPLEMENTED` | Two-stage candidate matcher (in-memory sealed; T1–T10, S1–S16) |
+| `core/operation_set_match` | `IMPLEMENTED` | Two-stage candidate matcher; queried by `/api/classify` in `server.ts`; T1–T10, S1–S16 pass per report |
 | `App` (UI/Server) | `BASELINE` | Minimal functional prototype; `/api/classify` implemented in `server.ts`, but UI tab not exposed in `App.tsx` |
 | `Discovery Engine` | `NOT_IMPLEMENTED` | Registry-free input enabled (input only, no automated discovery). |
 | `Evidence Generation`| `IMPLEMENTED` | Geometric Evidence (M-5F) + Crystallographic PropertyEvidence (KB-15) |
 | `Mathematical Passports`| `PARTIAL / BASELINE VALIDATED` | Passport V1 schema, YAML config, SG-002 verified test slice. |
-| `Registry & Validation` | `IMPLEMENTED` | 8 space group settings reconciled and verified; zero regressions. |
+| `Registry & Validation` | `IMPLEMENTED` | 8 space group settings in classifier catalog, 9 in registry; zero regressions. |
 | `Reference Pipeline` | `IMPLEMENTED` | KB-10 contract + KB-11 extraction + KB-13A comparator + KB-14/15 properties & evidence |
-| `Test Harness` | `15/15 PASS` | All 15 baseline project test suites pass cleanly with exit code 0 per execution report |
+| `Test Harness` | `15/15 PASS (WITH CAVEAT)` | All 15 baseline project test suites pass per execution report (HTTP API test caveat noted) |
 

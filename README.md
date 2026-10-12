@@ -27,7 +27,7 @@ This repository represents an **integrated research stand**, unifying capabiliti
 |  [Studio FSS Baseline Architecture]         [GROK v0.1.1 Adapted Capabilities]          |
 |  - Vector-affine geometric engine           - Two-stage classification algorithm        |
 |  - 3D Three.js interactive viewport         - Coordinate-independent invariant profiler|
-|  - 9-setting reference catalog              - Strict canonical key matcher              |
+|  - 8-setting classifier catalog (9 in registry)  - Strict canonical key matcher              |
 |  - Exact BigInt rational arithmetic         - Multiset duplicate detection              |
 |  - Express REST server & Vite build         - Soundness test suite (T1-T10, S1-S16)     |
 +-----------------------------------------------------------------------------------------+
@@ -39,7 +39,7 @@ This repository represents an **integrated research stand**, unifying capabiliti
 
 ### What was adapted and preserved from Studio FSS:
 * All rational arithmetic was adapted to Studio's BigInt-backed `ExactRational`.
-* The matcher was expanded from GROK's 4-group prototype to query Studio's **9-setting reference catalog** (`core/registry.ts`).
+* The matcher was expanded from GROK's 4-group prototype to query Studio's **8-setting classifier catalog** (`REGISTERED_SETTING_IDS`), while 9 settings are defined in the broader registry (`core/registry.ts`, including SG 76 / $P4_1$).
 * The vector-affine geometric engine (`core/engine.ts`), affine dimensionality engine (`core/dimension.ts`), and 3D visualization stand remained 100% intact with zero breaking modifications.
 
 ---
@@ -64,11 +64,15 @@ This repository represents an **integrated research stand**, unifying capabiliti
 ## 4. Current Mathematical Boundaries & Limitations
 
 To maintain scientific rigor, the system enforces strict epistemic boundaries:
-1. **Catalog Bound (9 of 230):** The current working catalog contains 9 space group settings (Nos. 1, 2, 3, 4, 5, 9, 14, 19, 76). Queries for the remaining 221 space groups correctly report `NO_CANDIDATES`.
+1. **Catalog Bound (8 of 230 in Classifier, 9 in Registry):** The fast classifier evaluates exactly 8 space group settings: Nos. 1 ($P1$), 2 ($P\bar{1}$), 3 ($P2$), 4 ($P2_1$), 5 ($C2$), 9 ($Cc$), 14 ($P2_1/c$), and 19 ($P2_12_12_1$). Setting 76 ($P4_1$) is registered in `core/registry.ts` but is explicitly excluded from `REGISTERED_SETTING_IDS`. Queries outside the 8 catalog settings evaluate to `NO_CANDIDATES` or `SETTING_MISMATCH`.
 2. **Invariant Profile $\neq$ Space Group Identification:** Invariant profile matching is a necessary filter, **never** a sufficient proof of space group identity (e.g. $P2$ and $P21$ have identical profiles).
 3. **Representation Matching $\neq$ General Isomorphism:** `EXACT_MATCH` proves equality in the canonical coordinate basis of the catalog setting modulo $\mathbb{Z}^3$. Arbitrary basis changes ($P \in GL_3(\mathbb{Z})$) and continuous origin shifts are not implemented.
 4. **Group Closure Notice:** The matcher evaluates complete operation lists against catalog entries. It does not automatically compute group closure $\langle S \rangle$ for sparse generator sets. (An isolated research module `core/group_closure.ts` exists and passed test suite T1–T15 per execution report [`ISOLATED_MODULE_TESTED`], but is strictly unwired from `classifyOperationSet`, `server.ts`, and the UI).
-5. **Gated UI/API Integration:** The classification engine is currently in-memory in `core/` and is **not wired** to `server.ts` or `App.tsx` pending human review of the API contract.
+5. **Gated UI/API Integration Status:**
+   - **Classification Core:** Fully implemented in-memory (`core/operation_set_profile.ts`, `core/operation_set_match.ts`).
+   - **API Route:** Implemented in `server.ts` via `POST /api/classify`. The presence of this endpoint does not imply that the API contract has received final human approval.
+   - **UI Component:** `ClassifierUI` component exists in `components/ClassifierUI.tsx` and is imported in `App.tsx`.
+   - **User Navigation:** The classifier tab is unexposed in user navigation; `App.tsx` holds view state initialized to `'experiment'` with no navigation switch control exposed in the interface (UI remains focused on the baseline regular tetrahedron experiment).
 
 For complete details, see [docs/LIMITATIONS.md](docs/LIMITATIONS.md) and [docs/CLASSIFIER_CONTRACT.md](docs/CLASSIFIER_CONTRACT.md).
 
@@ -187,11 +191,11 @@ fss-integrated-stand/
 
 ## 9. Current Status & Next Steps
 
-* **Current Status:** Integrated Research Stand (Phases 5A-5E Packaging, API, and UI Integration Complete).
-  - Classifier API (`/api/classify`) implemented and boundary-tested.
-  - Classifier UI view integrated and verified.
-  - 15 / 15 test suites PASS (100%).
+* **Current Status:** Integrated Research Stand (Phases 5A-5E Packaging & API Exposure Complete; UI Unexposed; GCL-01 Isolated).
+  - Classifier API (`POST /api/classify`) implemented in `server.ts` and boundary-tested (pending final API contract approval).
+  - Classifier UI component (`ClassifierUI`) implemented; navigation tab unexposed in `App.tsx`.
+  - 15 / 15 baseline test suites PASS per execution report (with caveat on HTTP API test process exit).
   - Mathematical core and catalog intact and unmodified.
 * **Next Steps:**
-  1. Phase 5F: Implementation of `core/group_closure.ts` for dynamic group closure verification.
+  1. Phase 5F Status: Group closure module (`core/group_closure.ts`) is implemented as an isolated research module (`ISOLATED_MODULE_TESTED`; tests T1–T15 PASS per report; strictly unwired to matcher, API, or UI). Potential pipeline integration remains a proposal for future consideration, not an approved requirement.
   2. Phase 6: Systematic expansion to full 230 space groups.

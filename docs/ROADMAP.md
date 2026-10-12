@@ -55,12 +55,15 @@
 ### Phase 5E — Classifier UI Integration (COMPLETE)
 * [x] Create React ClassifierUI component.
 * [x] Integrate with `POST /api/classify`.
-* [x] Add tab-based navigation for experiment vs. classifier.
-* [x] Verify UI functionality against API contract.
+* [ ] Add tab-based navigation for experiment vs. classifier (unexposed; view state initialized in `App.tsx` without navigation switcher).
+* [x] Verify UI component implementation against API contract.
 
 ---
 
-### Phase 5F — Group Closure Engine (PLANNED)
+### Phase 5F — Group Closure Engine (ISOLATED_MODULE_TESTED)
+* [x] Implement deterministic group closure from affine generators modulo $\mathbb{Z}^3$ on BigInt (`core/group_closure.ts`).
+* [x] Verified isolated test suite T1–T15 (`core/group_closure.test.ts`) per execution report.
+* [ ] Architectural decision on potential matcher/API pipeline integration (proposed for consideration; strictly unwired at present).
 
 ---
 

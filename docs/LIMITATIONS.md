@@ -32,10 +32,10 @@ To preserve scientific rigor, all developers, documentation authors, and API con
 | Capability | Status | Impact | Proposed Future Resolution |
 |:---|:---:|:---|:---|
 | **Expanded 230 Catalog** | `NOT_IMPLEMENTED` (8/230) | Queries for the other 222 space groups return `NO_CANDIDATES`. | Expand `core/registry.ts` using full ITA Volume A tables or authenticated Gemmi datasets. |
-| **Dynamic Group Closure** | `NOT_IMPLEMENTED` in matcher | Incomplete generator sets fail strict matching. | Implement `group_closure.ts` to compute $\langle S \rangle$ via Todd-Coxeter or Schreier-Sims algorithms. |
+| **Dynamic Group Closure** | `NOT_IMPLEMENTED` in matcher | Incomplete generator sets fail strict matching. | Research module `core/group_closure.ts` implemented in isolation (`ISOLATED_MODULE_TESTED`); unwired from matcher. Pipeline integration remains a proposal for consideration. |
 | **Continuous Origin Shift Solver** | `NOT_IMPLEMENTED` (Only 1 shift) | Non-standard origin choices cannot be mapped to canonical settings. | Implement an exact rational linear programming solver for $\vec{w}' = \vec{w} + (W - I)\vec{x}_0 \pmod{\mathbb{Z}^3}$. |
 | **Lattice Reduction ($GL_3(\mathbb{Z})$)** | `NOT_IMPLEMENTED` | Alternative cell settings (e.g. $P2_1/n$, $P2_1/a$) evaluate to `OPERATION_MISMATCH`. | Implement Delaunay or Gruber lattice basis reduction. |
-| **Classifier UI / REST Exposure** | `NOT_IMPLEMENTED` (Sealed) | Users cannot run the classifier from the web interface. | Implement `/api/classify` endpoint and React match inspector component. |
+| **Classifier UI / REST Exposure** | `PARTIAL` | Endpoint `/api/classify` implemented in `server.ts` (contract pending final review); `ClassifierUI` exists but navigation tab is unexposed in `App.tsx`. | Expose UI navigation switcher upon final approval of classifier API contract. |
 
 ---
 
