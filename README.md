@@ -67,7 +67,7 @@ To maintain scientific rigor, the system enforces strict epistemic boundaries:
 1. **Catalog Bound (9 of 230):** The current working catalog contains 9 space group settings (Nos. 1, 2, 3, 4, 5, 9, 14, 19, 76). Queries for the remaining 221 space groups correctly report `NO_CANDIDATES`.
 2. **Invariant Profile $\neq$ Space Group Identification:** Invariant profile matching is a necessary filter, **never** a sufficient proof of space group identity (e.g. $P2$ and $P21$ have identical profiles).
 3. **Representation Matching $\neq$ General Isomorphism:** `EXACT_MATCH` proves equality in the canonical coordinate basis of the catalog setting modulo $\mathbb{Z}^3$. Arbitrary basis changes ($P \in GL_3(\mathbb{Z})$) and continuous origin shifts are not implemented.
-4. **Group Closure Notice:** The matcher evaluates complete operation lists against catalog entries. It does not automatically compute group closure $\langle S \rangle$ for sparse generator sets.
+4. **Group Closure Notice:** The matcher evaluates complete operation lists against catalog entries. It does not automatically compute group closure $\langle S \rangle$ for sparse generator sets. (An isolated research module `core/group_closure.ts` exists and passed test suite T1–T15 per execution report [`ISOLATED_MODULE_TESTED`], but is strictly unwired from `classifyOperationSet`, `server.ts`, and the UI).
 5. **Gated UI/API Integration:** The classification engine is currently in-memory in `core/` and is **not wired** to `server.ts` or `App.tsx` pending human review of the API contract.
 
 For complete details, see [docs/LIMITATIONS.md](docs/LIMITATIONS.md) and [docs/CLASSIFIER_CONTRACT.md](docs/CLASSIFIER_CONTRACT.md).
