@@ -1,12 +1,15 @@
 # FSS — Known Issues
 
 ## SG 227 Discrepancies
-* **Symptom:** Generator produces 16 atoms for Si instead of 8; claims 96 operations instead of 192.
-* **Status:** Diagnosed, fix planned.
-* **Evidence:** Test `core/tests/sg227_comparison.test.ts` resulted in FAILED.
-* **Closing Condition:** Implementation matches independent reference (192 ops).
+* **Symptom:** Генератор `core/crystal_structure_generator.ts` возвращает 16 позиций для кремния Si вместо 8 физических позиций в кубической ячейке; замыкание 4 генераторов в `core/registry.ts` формирует порядок 96 вместо эталонных 192 операций (ITA Origin Choice 2).
+* **Status:** Диагностировано, подтверждено прогоном теста.
+* **Evidence:** Тест `npx tsx core/tests/sg227_comparison.test.ts` подтверждает 96 операций; `npx tsx core/tests/crystal_generator.test.ts` подтверждает генерацию 16 координат.
+* **Root Cause:**
+  1. Четыре генератора в `core/registry.ts` порождают только 96 операций группы $Fd\bar{3}m$, не покрывая полную подрешётку центрирования или полный точечный класс $m\bar{3}m$ с винтовыми сдвигами $d$.
+  2. Алгоритм дедупликации `isEquivalent` в `core/crystal_structure_generator.ts` проверяет совпадение только по модулю целочисленных трансляций $\mathbb{Z}^3$, игнорируя векторы гранецентрированной решётки Браве $F$ ($[0, \frac{1}{2}, \frac{1}{2}]$ и циклические перестановки).
+* **Closing Condition:** Приведение набора генераторов в соответствие с полным эталоном ITA (192 операции) и учет $F$-центрирования в логике факторизации орбиты в ячейке.
 
 ## General
-* **Catalog Completeness:** Catalog is partial (research-oriented), not a fully validated library of 230 space groups.
-* **Testing Status:** Most components have test code available but lack confirmed execution logs (status: IMPLEMENTED_UNVERIFIED).
-* **Dependency:** Missing external crystallographic libraries (spglib/gemmi) in sandbox.
+* **Среда выполнения TypeScript:** В проекте используется `"type": "module"` и `"moduleResolution": "bundler"` в `tsconfig.json`. Штатный запуск TS-скриптов и тестов выполняется через утилиту `tsx` (`npx tsx <path>`), входящую в `dependencies`. Запуск через `ts-node` приводит к `ERR_MODULE_NOT_FOUND` из-за различий в резолвинге ESM-расширений.
+* **Testing Status:** Математическое ядро, анализатор размерности, алгоритм замыкания групп и инвариантный классификатор успешно проходят тесты (`TESTED`), однако статус `VERIFIED` присваивается только после верификации независимым внешним эталоном (например, полная сверка с IUCr/Bilbao).
+* **Dependencies:** В изолированной среде отсутствуют нативные C-библиотеки кристаллографии (`spglib`/`gemmi`), все расчеты производятся внутренним точным рациональным ядром FSS.
