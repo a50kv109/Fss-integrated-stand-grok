@@ -2,13 +2,19 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { runSymmetryExperiment } from './core/engine';
 import { classifyOperationSet } from './core/operation_set_match';
 import { CANONICAL_STRUCTURES, CANONICAL_OPERATIONS } from './core/canonical';
+import { Gatekeeper } from './tools/fsspack-prototype/gatekeeper';
+import { PackageExporter } from './tools/fsspack-prototype/exporter';
+import { SymmetryCatalog } from './core/registry';
+import { SpaceGroupCatalogService } from './core/space_group_catalog';
+import { BatchMigrationEngine } from './tools/fsspack-prototype/batch_migration';
 
 const app = express();
 export { app };
-const PORT = 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 app.use(express.json({ limit: '100kb' }));
 
@@ -150,10 +156,107 @@ Keep the tone highly professional, precise, and visionary.`;
   }
 });
 
+// API: Export .fsspack package for a setting ID (e.g. P41)
+app.get('/api/fsspack/export/:settingId', (req, res) => {
+  try {
+    const settingId = req.params.settingId;
+    const record = SymmetryCatalog.findBySettingId(settingId);
+    if (!record) {
+      return res.status(404).json({ error: `Setting ID ${settingId} not found in catalog` });
+    }
+    const exportResult = PackageExporter.export(record);
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${settingId}.fsspack"`);
+    return res.send(exportResult.packageBuffer);
+  } catch (error: any) {
+    return res.status(500).json({ error: error?.message || 'Export failed' });
+  }
+});
+
+// API: Ingest and verify .fsspack package buffer via Gatekeeper
+app.post('/api/fsspack/ingest', express.raw({ type: '*/*', limit: '50mb' }), (req, res) => {
+  try {
+    const buffer = req.body;
+    if (!buffer || !Buffer.isBuffer(buffer) || buffer.length === 0) {
+      return res.status(400).json({ error: 'INVALID_PACKAGE_BUFFER' });
+    }
+    const result = Gatekeeper.ingest(buffer);
+    const extraFilesObj: Record<string, string> = {};
+    for (const [k, v] of result.extraFiles.entries()) {
+      extraFilesObj[k] = v.toString('base64');
+    }
+    return res.json({
+      report: result.report,
+      manifest: result.manifest,
+      mathModel: result.mathModel,
+      verificationPassport: result.verificationPassport,
+      provenance: result.provenance,
+      extraFiles: extraFilesObj
+    });
+  } catch (error: any) {
+    return res.status(500).json({ error: error?.message || 'Ingestion failed' });
+  }
+});
+
+// API: List 230 space groups with filtering and stats
+app.get('/api/catalog/groups', (req, res) => {
+  try {
+    const { search, crystalSystem, centering, status } = req.query as Record<string, string>;
+    const groups = SpaceGroupCatalogService.listGroups({ search, crystalSystem, centering, status });
+    const stats = SpaceGroupCatalogService.getStats();
+    return res.json({ groups, stats });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message || 'Failed to list space groups' });
+  }
+});
+
+// API: Get group passport
+app.get('/api/catalog/group/:number', (req, res) => {
+  try {
+    const num = parseInt(req.params.number, 10);
+    const settingId = req.query.settingId as string | undefined;
+    const passport = SpaceGroupCatalogService.getPassport(num, settingId);
+    if (!passport) {
+      return res.status(404).json({ error: `Space group #${num} not found in catalog` });
+    }
+    return res.json(passport);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message || 'Failed to get passport' });
+  }
+});
+
+// API: Get catalog coverage statistics
+app.get('/api/catalog/stats', (_req, res) => {
+  try {
+    const stats = SpaceGroupCatalogService.getStats();
+    return res.json(stats);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message || 'Failed to get stats' });
+  }
+});
+
+// API: Batch export multiple space groups as a ZIP of .fsspack files
+app.post('/api/fsspack/batch-export', (req, res) => {
+  try {
+    const { targets } = req.body;
+    if (!Array.isArray(targets) || targets.length === 0) {
+      return res.status(400).json({ error: 'targets array is required' });
+    }
+    const result = BatchMigrationEngine.exportBatch(targets);
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${result.archiveFileName}"`);
+    res.setHeader('X-Batch-Success-Count', String(result.successCount));
+    res.setHeader('X-Batch-Error-Count', String(result.errorCount));
+    return res.send(result.zipBuffer);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message || 'Batch export failed' });
+  }
+});
+
 async function startServer() {
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(process.cwd(), 'dist')));
-    app.get('*', (_req, res) => {
+    app.use((_req, res) => {
       res.sendFile(path.resolve(process.cwd(), 'dist', 'index.html'));
     });
   } else {
@@ -169,7 +272,15 @@ async function startServer() {
   });
 }
 
-// ...
-if (import.meta.url === `file://${process.cwd()}/server.ts`) {
-  startServer();
+const isMain = process.argv[1] && (
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1]) ||
+  process.argv[1].endsWith('server.ts') ||
+  process.argv[1].endsWith('server.js')
+);
+
+if (isMain) {
+  startServer().catch((err) => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  });
 }

@@ -20,8 +20,8 @@ import {
   Rational,
   ExchangeSymmetryOperation,
   canonicalOperationKey
-} from './schema/crystallographic_exchange';
-import { AffineOperationAlgebra } from './group_properties';
+} from './schema/crystallographic_exchange.ts';
+import { AffineOperationAlgebra } from './group_properties.ts';
 
 export type GroupClosureStatus = 'CLOSED' | 'LIMIT_EXCEEDED' | 'INVALID_INPUT';
 

@@ -1,4 +1,4 @@
-import { Matrix4x4, Operation } from './types';
+import { Matrix4x4, Operation } from './types.ts';
 
 export interface Rational {
   numerator: number;

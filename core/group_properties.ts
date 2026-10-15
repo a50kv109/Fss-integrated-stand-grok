@@ -14,7 +14,7 @@ import {
   ExactRational,
   ExchangeSymmetryOperation,
   SpaceGroupRecord
-} from './schema/crystallographic_exchange';
+} from './schema/crystallographic_exchange.js';
 
 export type VerificationStatus = 'VERIFIED' | 'INCOMPLETE' | 'NOT_APPLICABLE';
 

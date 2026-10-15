@@ -1,4 +1,4 @@
-import { SymmetryRecord } from './symmetry_adapter';
+import { SymmetryRecord } from './symmetry_adapter.ts';
 
 export interface ProvenanceInfo {
   source: string;
@@ -193,6 +193,77 @@ export class SymmetryCatalog {
         { W: [[0, -1, 0], [1, 0, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 4 }] },
         { W: [[-1, 0, 0], [0, -1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }] },
         { W: [[0, 1, 0], [-1, 0, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 3, denominator: 4 }] }
+      ]
+    },
+    {
+      groupNumber: 186,
+      settingId: "P63mc",
+      hmSymbol: "P 63 m c",
+      hallSymbol: "P 6c -2c",
+      provenance: "Gemmi/ITA 2024.1 (MPL-2.0)",
+      provenanceDetails: {
+        source: "CCTBX/IUCr/Gemmi",
+        commitOrVersion: "Verification-2026-10-14",
+        tablePath: "ITA2024",
+        license: "MPL-2.0",
+        attribution: "International Tables for Crystallography (ITA)",
+        normalizationMethod: "Exact rational extraction from Hall symbols"
+      },
+      operations: [
+        { W: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[0, -1, 0], [1, -1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }] },
+        { W: [[-1, -1, 0], [1, 0, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[-1, 0, 0], [0, -1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }] },
+        { W: [[0, 1, 0], [-1, 1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[1, 1, 0], [-1, 0, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }] },
+        { W: [[0, -1, 0], [-1, 0, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[1, 0, 0], [1, -1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }] },
+        { W: [[1, -1, 0], [0, 1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[0, 1, 0], [1, 0, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }] },
+        { W: [[-1, 0, 0], [-1, 1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[-1, 1, 0], [0, -1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }] }
+      ]
+    },
+    {
+      groupNumber: 216,
+      settingId: "F-43m",
+      hmSymbol: "F -4 3 m",
+      hallSymbol: "F -4 2 3",
+      provenance: "Gemmi/ITA 2024.1 (MPL-2.0)",
+      provenanceDetails: {
+        source: "CCTBX/IUCr/Gemmi",
+        commitOrVersion: "Verification-2026-10-14",
+        tablePath: "ITA2024",
+        license: "MPL-2.0",
+        attribution: "International Tables for Crystallography (ITA)",
+        normalizationMethod: "Exact rational extraction from Hall symbols"
+      },
+      operations: [
+        { W: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[0, 1, 0], [-1, 0, 0], [0, 0, -1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[0, 0, 1], [1, 0, 0], [0, 1, 0]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], w: [{ numerator: 1, denominator: 2 }, { numerator: 1, denominator: 2 }, { numerator: 0, denominator: 1 }] }
+      ]
+    },
+    {
+      groupNumber: 227,
+      settingId: "Fd-3m",
+      hmSymbol: "F d -3 m",
+      hallSymbol: "F 4d 2 3 -1d",
+      provenance: "Gemmi/ITA 2024.1 (MPL-2.0)",
+      provenanceDetails: {
+        source: "CCTBX/IUCr/Gemmi",
+        commitOrVersion: "Verification-2026-10-14",
+        tablePath: "ITA2024",
+        license: "MPL-2.0",
+        attribution: "International Tables for Crystallography (ITA)",
+        normalizationMethod: "Exact rational extraction from Hall symbols"
+      },
+      operations: [
+        { W: [[0, 0, 1], [1, 0, 0], [0, 1, 0]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[-1, 0, 0], [0, -1, 0], [0, 0, -1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }, { numerator: 0, denominator: 1 }] },
+        { W: [[0, 1, 0], [1, 0, 0], [0, 0, 1]], w: [{ numerator: 1, denominator: 4 }, { numerator: 1, denominator: 4 }, { numerator: 1, denominator: 4 }] },
+        { W: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], w: [{ numerator: 0, denominator: 1 }, { numerator: 1, denominator: 2 }, { numerator: 1, denominator: 2 }] }
       ]
     }
   ];
